@@ -16,7 +16,8 @@ public class PickupObject : TargetObject
     [Tooltip("Destroy this gameobject after collectDuration seconds")]
     public float collectDuration = 0f;
 
-    void Start() {
+    void Start() 
+    {
         Register();
     }
 

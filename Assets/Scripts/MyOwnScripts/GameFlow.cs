@@ -5,9 +5,17 @@ using KartGame.KartSystems;
 using TMPro;
 using UnityEngine.SceneManagement;
 using Gerardo.TimeController;
+using Gerardo.GameModes; 
 
 namespace Gerardo.Game
 {
+    public enum ModeGame
+    {
+        againstClock, 
+        infinityDriver, 
+        race
+    }
+
     public class GameFlow : MonoBehaviour
     {
         ArcadeKart[] karts;
@@ -20,6 +28,9 @@ namespace Gerardo.Game
         public GameObject canvasGameOver;
         public GameObject canvasWin;
 
+        [Header("Mode Game")]
+        public ModeGame modeGame = new ModeGame(); 
+
         public bool isGameOver;
         public bool isWin;
 
@@ -27,8 +38,9 @@ namespace Gerardo.Game
         {
             raceStarted = false;
             karts = FindObjectsOfType<ArcadeKart>();
-            EnableKart(false); 
-            StartCoroutine(CRaceCountdown()); 
+            EnableKart(false);
+            if (modeGame == ModeGame.againstClock)
+                StartCoroutine(CRaceCountdown()); 
         }
 
         IEnumerator CRaceCountdown()
@@ -64,7 +76,9 @@ namespace Gerardo.Game
         {
             canvasGameOver.SetActive(true);
             EnableKart(false);
-            isGameOver = true; 
+            isGameOver = true;
+            if (modeGame == ModeGame.infinityDriver)
+                Time.timeScale = 0; 
         }
 
         public void Win()
@@ -82,16 +96,23 @@ namespace Gerardo.Game
         public void GoToMainMenu()
         {
             SceneManager.LoadScene("Main");
+            Time.timeScale = 1; 
         }
 
         private void OnEnable()
         {
-            HandlerTime.onTimerFinished += GameOver;
+            if (modeGame == ModeGame.againstClock)
+                HandlerTime.onTimerFinished += GameOver;
+            else if (modeGame == ModeGame.infinityDriver)
+                HandlerInfinityDriver.OnCrashedPlayer += GameOver; 
         }
 
         private void OnDisable()
         {
-            HandlerTime.onTimerFinished -= GameOver;
+            if (modeGame == ModeGame.againstClock)
+                HandlerTime.onTimerFinished -= GameOver;
+            else if (modeGame == ModeGame.infinityDriver)
+                HandlerInfinityDriver.OnCrashedPlayer -= GameOver;
         }
     }
 }

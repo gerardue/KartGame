@@ -135,8 +135,8 @@ namespace KartGame.KartSystems
         {
             Rigidbody = GetComponent<Rigidbody>();
             m_Inputs = GetComponents<IInput>();
-            suspensionNeutralPos = SuspensionBody.transform.localPosition;
-            suspensionNeutralRot = SuspensionBody.transform.localRotation;
+            //suspensionNeutralPos = SuspensionBody.transform.localPosition;
+            //suspensionNeutralRot = SuspensionBody.transform.localRotation;
         }
 
         void FixedUpdate()
@@ -235,11 +235,11 @@ namespace KartGame.KartSystems
             bodyRot.x = Mathf.Lerp(closestNeutralRot, bodyRot.x, suspensionT);
 
             // transform bodyRot to suspension local space
-            suspensionTargetRot = Quaternion.Inverse(SuspensionBody.transform.rotation) * Quaternion.Euler(bodyRot);
+            //suspensionTargetRot = Quaternion.Inverse(SuspensionBody.transform.rotation) * Quaternion.Euler(bodyRot);
 
-            // apply the new transforms
-            SuspensionBody.transform.localPosition = Vector3.Lerp(SuspensionBody.transform.localPosition, suspensionTargetPos, Time.deltaTime * 5f);
-            SuspensionBody.transform.localRotation = Quaternion.Slerp(SuspensionBody.transform.localRotation, suspensionTargetRot, Time.deltaTime * 5f);
+            //// apply the new transforms
+            //SuspensionBody.transform.localPosition = Vector3.Lerp(SuspensionBody.transform.localPosition, suspensionTargetPos, Time.deltaTime * 5f);
+            //SuspensionBody.transform.localRotation = Quaternion.Slerp(SuspensionBody.transform.localRotation, suspensionTargetRot, Time.deltaTime * 5f);
         }
 
         int CountGroundedWheels(out float minHeight)

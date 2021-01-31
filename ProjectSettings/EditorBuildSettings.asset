@@ -17,4 +17,13 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/WinScene.unity
     guid: d6801f2e59f75ee4b919cf5da4e48e3b
+  - enabled: 1
+    path: Assets/Scenes/InfinityDriver.unity
+    guid: eae6380c513f0e94781f45fbed0fa11e
+  - enabled: 1
+    path: Assets/Scenes/RaceAgainstClock.unity
+    guid: 17787f4531ed63542986265e46de3e73
+  - enabled: 1
+    path: Assets/Scenes/SelectKart.unity
+    guid: 2b0f4ada499167844b367c38aec1fc2a
   m_configObjects: {}

@@ -5,7 +5,8 @@ using KartGame.KartSystems;
 using TMPro;
 using UnityEngine.SceneManagement;
 using Gerardo.TimeController;
-using Gerardo.GameModes; 
+using Gerardo.GameModes;
+using UnityEngine.UI;
 
 namespace Gerardo.Game
 {
@@ -26,7 +27,9 @@ namespace Gerardo.Game
 
         [Header("Canvases Win and Lose")]
         public GameObject canvasGameOver;
+        public Button firstSelectGameOver;
         public GameObject canvasWin;
+        public Button firstSelectWin;
 
         [Header("Mode Game")]
         public ModeGame modeGame = new ModeGame(); 
@@ -77,6 +80,7 @@ namespace Gerardo.Game
             canvasGameOver.SetActive(true);
             EnableKart(false);
             isGameOver = true;
+            firstSelectGameOver.Select(); 
             if (modeGame == ModeGame.infinityDriver)
                 Time.timeScale = 0; 
         }
@@ -85,7 +89,8 @@ namespace Gerardo.Game
         {
             canvasWin.SetActive(true);
             EnableKart(false);
-            isWin = true; 
+            isWin = true;
+            firstSelectWin.Select(); 
         }
 
         public void PlayAgain()

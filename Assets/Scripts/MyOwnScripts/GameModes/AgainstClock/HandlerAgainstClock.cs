@@ -38,6 +38,7 @@ namespace Gerardo.GameModes
 
         private void Start()
         {
+            Time.timeScale = 1;
             AssignBonusesOfTime();
             HandlerTime.OnSetTimeInitial(time);   
         }
@@ -74,20 +75,5 @@ namespace Gerardo.GameModes
             GameObject[] bonuses = GameObject.FindGameObjectsWithTag("BonusTime");
             bonusesOfTime.AddRange(bonuses); 
         }
-
-        //void GameOver()
-        //{
-        //    gameFlow.GameOver();
-        //}
-
-        //private void OnEnable()
-        //{
-        //    HandlerTime.onTimerFinished += GameOver; 
-        //}
-
-        //private void OnDisable()
-        //{
-        //    HandlerTime.onTimerFinished -= GameOver;
-        //}
     }
 }

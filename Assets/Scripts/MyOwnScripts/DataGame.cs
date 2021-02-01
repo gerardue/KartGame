@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Gerardo.IA; 
 
 public class DataGame : MonoBehaviour
 {
@@ -10,13 +11,13 @@ public class DataGame : MonoBehaviour
     public int indexKart; 
     public int indexTires; 
     public int indexChasis;
-    public string nameSceneToLoad; 
+    public string nameSceneToLoad;
+    public DificultIA dificultIA; 
 
     private void Awake()
     {
         if (Instance == null) { Instance = this; DontDestroyOnLoad(gameObject); }
         else Destroy(gameObject); 
     }
-
     
 }

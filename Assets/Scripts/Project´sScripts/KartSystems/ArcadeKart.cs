@@ -116,7 +116,13 @@ namespace KartGame.KartSystems
         [Tooltip("How high to keep the kart above the ground.")]
         public float MinHeightThreshold = 0.02f;
 
+        [Header("Power Drift")]
+        public float powerDrift; 
+
         public Transform SuspensionBody;
+
+        [HideInInspector]
+        public Vector3 fowardDir; 
 
         // saved transforms of where the suspension's neutral positions are
         Vector3 suspensionNeutralPos;
@@ -127,9 +133,11 @@ namespace KartGame.KartSystems
 
         // can the kart move?
         bool canMove = true;
+        bool drifting = false; 
         List<StatPowerup> activePowerupList = new List<StatPowerup>();
         GameObject lastGroundCollided = null;
         ArcadeKart.Stats finalStats;
+
 
         void Awake()
         {
@@ -139,8 +147,15 @@ namespace KartGame.KartSystems
             //suspensionNeutralRot = SuspensionBody.transform.localRotation;
         }
 
+        private void Update()
+        {
+            if (UnityEngine.Input.GetKeyDown(KeyCode.X)) drifting = true;
+            if (UnityEngine.Input.GetKeyUp(KeyCode.X)) drifting = false;
+        }
+
         void FixedUpdate()
         {
+            fowardDir = transform.forward; 
             ResetIfStuck();
 
             GatherInputs();
@@ -162,9 +177,11 @@ namespace KartGame.KartSystems
 
             // apply vehicle physics
             GroundVehicle(minHeight);
+
             if (canMove)
             {
-                MoveVehicle(accel, turn);
+                if (drifting) MoveVehicle(accel, turn * powerDrift);
+                if (!drifting) MoveVehicle(accel, turn);
             }
             GroundAirbourne();
 
@@ -282,7 +299,7 @@ namespace KartGame.KartSystems
             }
         }
 
-        void MoveVehicle(float accelInput, float turnInput)
+        public void MoveVehicle(float accelInput, float turnInput)
         {
             // manual acceleration curve coefficient scalar
             float accelerationCurveCoeff = 5;

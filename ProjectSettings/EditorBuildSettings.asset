@@ -26,4 +26,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/SelectKart.unity
     guid: 2b0f4ada499167844b367c38aec1fc2a
+  - enabled: 1
+    path: Assets/Scenes/IA.unity
+    guid: 49ae6bd96036dc3438b6957b00c20d14
   m_configObjects: {}
